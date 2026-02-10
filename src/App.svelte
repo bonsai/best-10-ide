@@ -8,6 +8,11 @@
   let likeCount = 0;
   const MAX_LIKES = 10;
   let glowingToolName = null;
+  let isLoading = true;
+
+  // Base URL for your API. This will be your Cloud Function URL after deployment.
+  // For local testing, it will be the emulator URL.
+  const apiUrl = 'YOUR_API_BASE_URL'; // e.g., http://127.0.0.1:5001/your-project/us-central1/api
 
   const colorMap = {
     'from-indigo-500': '#6366f1',
@@ -28,49 +33,80 @@
     'to-gray-600': '#4b5563'
   };
 
-  onMount(async () => {
-    const res = await fetch('./tools.json');
-    tools = await res.json();
-  });
-
-  function incrementLikes(tool) {
-    if (likeCount < MAX_LIKES) {
-      tool.likes++;
-      likeCount++;
-      tools = [...tools]; // Trigger reactivity
-
-      glowingToolName = tool.name;
-      setTimeout(() => {
-        glowingToolName = null;
-      }, 3000);
+  async function fetchTools() {
+    try {
+      const res = await fetch(`${apiUrl}/tools`);
+      if (!res.ok) throw new Error(`Failed to fetch tools: ${res.statusText}`);
+      tools = await res.json();
+    } catch (error) {
+      console.error("Error fetching tools:", error);
+      // You might want to show an error message to the user here
+    } finally {
+      isLoading = false;
     }
   }
 
-  function addTool() {
-    if (newUrl.trim() !== "") {
-      tools = [
-        ...tools,
-        {
-          rank: tools.length + 1,
-          name: "New Tool",
-          tagline: "Pending Approval",
-          desc: "This tool is pending approval from the administrator.",
-          tags: ["New"],
-          color: "from-gray-400 to-gray-600",
-          icon: `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-gray-400\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"16\" x2=\"12.01\" y2=\"16\"/></svg>`,
-          likes: 0,
-          url: newUrl,
-          approved: false,
+  onMount(fetchTools);
+
+  async function incrementLikes(tool) {
+    if (likeCount >= MAX_LIKES || glowingToolName) return;
+
+    likeCount++;
+    glowingToolName = tool.name;
+
+    try {
+        const response = await fetch(`${apiUrl}/like`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ toolName: tool.name }),
+        });
+        if (!response.ok) throw new Error('Failed to update likes');
+
+        // Wait for the glow animation to finish, then refetch tools to get updated likes
+        setTimeout(async () => {
+            await fetchTools(); // Refetch all data to ensure consistency
+            glowingToolName = null;
+        }, 3000);
+
+    } catch (error) {
+        console.error("Error incrementing likes:", error);
+        likeCount--; // Revert optimistic update on error
+        glowingToolName = null;
+    }
+  }
+
+  async function addTool() {
+    if (newUrl.trim() === "") return;
+
+    try {
+      const response = await fetch(`${apiUrl}/url`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      ];
-      newUrl = "";
-      submitted = true;
+        body: JSON.stringify({ url: newUrl }),
+      });
+
+      if (response.ok) {
+        submitted = true;
+        newUrl = '';
+      } else {
+        console.error("Failed to submit tool:", await response.text());
+        alert("Submission failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting tool:", error);
+      alert("An error occurred. Please check the console.");
     }
   }
 
   $: sortedTools = [...tools].sort((a, b) => {
     if (b.likes === a.likes) {
-      return Math.random() - 0.5;
+      // Keep a stable sort for items with the same like count if possible
+      // Or randomize as before if that's the desired effect
+      return a.name.localeCompare(b.name); 
     }
     return b.likes - a.likes;
   }).slice(0, 10);
@@ -79,6 +115,12 @@
   $: headerStyle = topTool ? `background-image: linear-gradient(to right, ${colorMap[topTool.color.split(' ')[0]] || '#fff'}, ${colorMap[topTool.color.split(' ')[1]] || '#94a3b8'});` : '';
 
 </script>
+
+{#if isLoading}
+  <div class="loading-overlay">
+    <p>Loading The Elite GUI...</p>
+  </div>
+{/if}
 
 <header class="max-w-7xl mx-auto text-center mb-20">
   <h1 class="text-6xl md:text-8xl font-extrabold mb-6 gradient-text tracking-tighter" style={headerStyle}>
@@ -92,12 +134,13 @@
 <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
   {#each sortedTools as tool, i (tool.name)}
     <div
-      animate:flip={{duration: 300}}
+      animate:flip={{duration: 500}}
       class="bento-card rounded-[2rem] p-8 flex flex-col justify-between transition-all duration-300 md:col-span-1 {tool.approved ? '' : 'opacity-50 grayscale'}"
       class:lg:col-span-3={i < 2}
       class:lg:col-span-2={i >= 2}
       class:glowing={glowingToolName === tool.name}
     >
+      <!-- Content remains the same -->
       <div>
         <div class="flex justify-between items-center mb-6">
           <span
@@ -136,7 +179,7 @@
         {#if tool.approved}
           <button
             on:click={() => incrementLikes(tool)}
-            disabled={likeCount >= MAX_LIKES}
+            disabled={likeCount >= MAX_LIKES || glowingToolName}
             class="text-sm font-black text-white/40 hover:text-white transition-all flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
           >
             LIKE <span class="text-2xl group-hover:animate-shake group-disabled:animate-none">👍️</span>
@@ -171,6 +214,21 @@
 </footer>
 
 <style>
+  /* Styles remain the same, but add loading style */
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(5, 5, 5, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+    font-size: 1.5rem;
+  }
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
 
   :global(body) {
@@ -227,18 +285,17 @@
   }
 
   .glowing {
-    animation: rainbow-glow 0.5s 3 alternate;
+    animation: rainbow-glow 1s ease-in-out 3;
   }
 
   @keyframes rainbow-glow {
-    0% { box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.7); }
+    0%, 100% { box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.7); }
     15% { box-shadow: 0 0 20px 5px rgba(255, 165, 0, 0.7); }
     30% { box-shadow: 0 0 20px 5px rgba(255, 255, 0, 0.7); }
     45% { box-shadow: 0 0 20px 5px rgba(0, 128, 0, 0.7); }
     60% { box-shadow: 0 0 20px 5px rgba(0, 0, 255, 0.7); }
     75% { box-shadow: 0 0 20px 5px rgba(75, 0, 130, 0.7); }
     90% { box-shadow: 0 0 20px 5px rgba(238, 130, 238, 0.7); }
-    100% { box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.7); }
   }
 
   :global(::-webkit-scrollbar) {
