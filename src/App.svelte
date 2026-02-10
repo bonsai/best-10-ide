@@ -49,6 +49,24 @@
 </header>
 
 <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+  <div class="bento-card rounded-[2rem] p-8 lg:col-span-6">
+    <h2 class="text-2xl font-bold mb-4">Add a new tool</h2>
+    <div class="flex gap-4">
+      <input
+        type="text"
+        bind:value={newUrl}
+        placeholder="Enter tool URL"
+        class="flex-grow bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+      <button
+        on:click={addTool}
+        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+      >
+        Add Tool
+      </button>
+    </div>
+  </div>
+
   {#each sortedTools as tool, i (tool.name)}
     <div
       animate:flip={{duration: 300}}
@@ -57,11 +75,9 @@
         : 'opacity-50 grayscale'} {i === sortedTools.length - 1 && i !== 0
         ? 'grayscale'
         : ''}"
-      class:lg:col-span-6={i === 0}
-      class:lg:col-span-3={i >= 1 && i <= 4}
-      class:lg:col-span-2={i > 4}
-      class:md:col-span-2={i <= 2}
-      class:md:col-span-1={i > 2}
+      class:lg:col-span-3={i < 2}
+      class:lg:col-span-2={i >= 2}
+      class:md:col-span-1
     >
       <div>
         <div class="flex justify-between items-center mb-6">
@@ -110,31 +126,13 @@
             on:click={() => incrementLikes(tool)}
             class="text-sm font-black text-white/40 hover:text-white transition-all flex items-center gap-2 group"
           >
-            LIKE <span class="group-hover:translate-x-1 transition-transform">&#x2764;</span>
+            LIKE <span class="text-2xl group-hover:animate-shake">👍️</span>
           </button>
         {/if}
       </div>
     </div>
   {/each}
 </main>
-
-<div class="max-w-7xl mx-auto mt-12 p-8 bento-card rounded-[2rem]">
-  <h2 class="text-2xl font-bold mb-4">Add a new tool</h2>
-  <div class="flex gap-4">
-    <input
-      type="text"
-      bind:value={newUrl}
-      placeholder="Enter tool URL"
-      class="flex-grow bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-    />
-    <button
-      on:click={addTool}
-      class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-    >
-      Add Tool
-    </button>
-  </div>
-</div>
 
 <footer class="max-w-7xl mx-auto mt-24 text-center text-gray-600 pb-16">
   <p class="text-sm tracking-widest uppercase">
@@ -183,6 +181,16 @@
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
     margin-bottom: 1.5rem;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    75% { transform: rotate(15deg); }
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
   }
 
   :global(::-webkit-scrollbar) {
