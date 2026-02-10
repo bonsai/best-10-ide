@@ -41,51 +41,48 @@ exports.api = functions.https.onRequest(async (req, res) => {
   }
 
   try {
-    if (req.path.endsWith("/tools")) {
-      const tools = await readJsonFile(toolsPath);
-      const likes = await readJsonFile(likesPath);
-      const mergedTools = tools.map(tool => ({
-        ...tool,
-        likes: likes[tool.name] || 0,
-      }));
-      res.status(200).json(mergedTools);
+    const route = req.path.split('/').pop();
 
-    } else if (req.path.endsWith("/like")) { // Handles single like, kept for potential direct use
-      if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
-      const { toolName } = req.body;
-      if (!toolName) return res.status(400).send("Bad Request: toolName is missing");
+    switch (route) {
+      case 'tools':
+        const tools = await readJsonFile(toolsPath);
+        const likes = await readJsonFile(likesPath);
+        const mergedTools = tools.map(tool => ({
+          ...tool,
+          likes: likes[tool.name] || 0,
+        }));
+        res.status(200).json(mergedTools);
+        break;
 
-      const likes = await readJsonFile(likesPath);
-      likes[toolName] = (likes[toolName] || 0) + 1;
-      await writeJsonFile(likesPath, likes);
-      res.status(200).json({ likes: likes[toolName] });
+      case 'batch': // Handles batch updates at /api/likes/batch
+        if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+        const { likes: batchLikes } = req.body;
+        if (!batchLikes) return res.status(400).send("Bad Request: likes object is missing");
 
-    } else if (req.path.endsWith("/likes/batch")) { // Handles batch updates
-      if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
-      const { likes: batchLikes } = req.body;
-      if (!batchLikes) return res.status(400).send("Bad Request: likes object is missing");
-
-      const likes = await readJsonFile(likesPath);
-      for (const toolName in batchLikes) {
-        if (Object.prototype.hasOwnProperty.call(batchLikes, toolName)) {
-            likes[toolName] = (likes[toolName] || 0) + batchLikes[toolName];
+        const currentLikes = await readJsonFile(likesPath);
+        for (const toolName in batchLikes) {
+          if (Object.prototype.hasOwnProperty.call(batchLikes, toolName)) {
+            currentLikes[toolName] = (currentLikes[toolName] || 0) + batchLikes[toolName];
+          }
         }
-      }
-      await writeJsonFile(likesPath, likes);
-      res.status(200).send("Batch update successful");
+        await writeJsonFile(likesPath, currentLikes);
+        res.status(200).send("Batch update successful");
+        break;
 
-    } else if (req.path.endsWith("/url")) {
-      if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
-      const { url } = req.body;
-      if (!url) return res.status(400).send("Bad Request: url is missing");
+      case 'url':
+        if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+        const { url } = req.body;
+        if (!url) return res.status(400).send("Bad Request: url is missing");
 
-      const urls = await readJsonFile(urlsPath);
-      urls.push({ url, submittedAt: new Date().toISOString() });
-      await writeJsonFile(urlsPath, urls);
-      res.status(200).send("URL submitted successfully");
+        const urls = await readJsonFile(urlsPath);
+        urls.push({ url, submittedAt: new Date().toISOString() });
+        await writeJsonFile(urlsPath, urls);
+        res.status(200).send("URL submitted successfully");
+        break;
 
-    } else {
-      res.status(404).send("Not Found");
+      default:
+        res.status(404).send("Not Found");
+        break;
     }
   } catch (error) {
     console.error("API Error:", error);

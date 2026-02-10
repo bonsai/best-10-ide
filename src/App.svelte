@@ -1,18 +1,21 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { flip } from 'svelte/animate';
 
   let tools = [];
   let newUrl = "";
   let submitted = false;
-  let likeCount = 0;
-  const MAX_LIKES = 10;
+  let sessionLikeCount = 0;
+  const MAX_LIKES_PER_SESSION = 10;
   let glowingToolName = null;
   let isLoading = true;
 
-  // Base URL for your API. This will be your Cloud Function URL after deployment.
-  // For local testing, it will be the emulator URL.
-  const apiUrl = 'YOUR_API_BASE_URL'; // e.g., http://127.0.0.1:5001/your-project/us-central1/api
+  // APIのベースURL（デプロイ後に実際のURLに置き換えてください）
+  const apiUrl = 'YOUR_API_BASE_URL'; // 例: http://127.0.0.1:5001/your-project/us-central1/api
+
+  let pendingLikes = {};
+  let likeBatchInterval = null;
+  let isSendingBatch = false;
 
   const colorMap = {
     'from-indigo-500': '#6366f1',
@@ -40,41 +43,84 @@
       tools = await res.json();
     } catch (error) {
       console.error("Error fetching tools:", error);
-      // You might want to show an error message to the user here
     } finally {
       isLoading = false;
     }
   }
 
-  onMount(fetchTools);
-
-  async function incrementLikes(tool) {
-    if (likeCount >= MAX_LIKES || glowingToolName) return;
-
-    likeCount++;
-    glowingToolName = tool.name;
+  async function sendLikesBatch() {
+    if (isSendingBatch || Object.keys(pendingLikes).length === 0) {
+      return;
+    }
+    isSendingBatch = true;
+    
+    const batchData = { ...pendingLikes };
+    pendingLikes = {};
 
     try {
-        const response = await fetch(`${apiUrl}/like`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ toolName: tool.name }),
-        });
-        if (!response.ok) throw new Error('Failed to update likes');
-
-        // Wait for the glow animation to finish, then refetch tools to get updated likes
-        setTimeout(async () => {
-            await fetchTools(); // Refetch all data to ensure consistency
-            glowingToolName = null;
-        }, 3000);
-
+      const res = await fetch(`${apiUrl}/likes/batch`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ likes: batchData }),
+      });
+      if (!res.ok) {
+        throw new Error('Failed to send likes batch');
+      }
     } catch (error) {
-        console.error("Error incrementing likes:", error);
-        likeCount--; // Revert optimistic update on error
-        glowingToolName = null;
+      console.error(error);
+      // If sending fails, merge the failed batch back into pendingLikes
+      for (const toolName in batchData) {
+        pendingLikes[toolName] = (pendingLikes[toolName] || 0) + batchData[toolName];
+      }
+    } finally {
+      isSendingBatch = false;
     }
+  }
+
+  const handleBeforeUnload = () => {
+    if (Object.keys(pendingLikes).length > 0) {
+        const url = `${apiUrl}/likes/batch`;
+        const data = JSON.stringify({ likes: pendingLikes });
+        // Use sendBeacon for reliable data transmission on page unload
+        navigator.sendBeacon(url, data);
+    }
+  }
+
+  onMount(() => {
+    fetchTools();
+    // Send likes batch every 2 minutes
+    likeBatchInterval = setInterval(sendLikesBatch, 120000);
+    // Add event listener for when the user leaves the page
+    window.addEventListener('beforeunload', handleBeforeUnload);
+  });
+
+  onDestroy(() => {
+    // Clean up interval and event listener
+    clearInterval(likeBatchInterval);
+    window.removeEventListener('beforeunload', handleBeforeUnload);
+    // Send any remaining likes before the component is destroyed
+    sendLikesBatch();
+  });
+
+  function incrementLikes(tool) {
+    if (sessionLikeCount >= MAX_LIKES_PER_SESSION || glowingToolName) return;
+
+    sessionLikeCount++;
+    glowingToolName = tool.name;
+
+    // Optimistic UI update
+    const toolIndex = tools.findIndex(t => t.name === tool.name);
+    if (toolIndex !== -1) {
+      tools[toolIndex].likes++;
+      tools = [...tools];
+    }
+
+    // Record the like to be sent in a batch
+    pendingLikes[tool.name] = (pendingLikes[tool.name] || 0) + 1;
+
+    setTimeout(() => {
+      glowingToolName = null;
+    }, 3000);
   }
 
   async function addTool() {
@@ -83,9 +129,7 @@
     try {
       const response = await fetch(`${apiUrl}/url`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ url: newUrl }),
       });
 
@@ -93,28 +137,20 @@
         submitted = true;
         newUrl = '';
       } else {
-        console.error("Failed to submit tool:", await response.text());
         alert("Submission failed. Please try again.");
       }
     } catch (error) {
-      console.error("Error submitting tool:", error);
       alert("An error occurred. Please check the console.");
     }
   }
 
-  $: sortedTools = [...tools].sort((a, b) => {
-    if (b.likes === a.likes) {
-      // Keep a stable sort for items with the same like count if possible
-      // Or randomize as before if that's the desired effect
-      return a.name.localeCompare(b.name); 
-    }
-    return b.likes - a.likes;
-  }).slice(0, 10);
-
+  $: sortedTools = [...tools].sort((a, b) => b.likes - a.likes).slice(0, 10);
   $: topTool = sortedTools[0];
-  $: headerStyle = topTool ? `background-image: linear-gradient(to right, ${colorMap[topTool.color.split(' ')[0]] || '#fff'}, ${colorMap[topTool.color.split(' ')[1]] || '#94a3b8'});` : '';
+  $: headerStyle = topTool ? `background-image: linear-gradient(to right, ${colorMap[topTool.color.split(' ')[0]]}, ${colorMap[topTool.color.split(' ')[1]]});` : '';
 
 </script>
+
+<!-- HTML and Style sections remain the same as before -->
 
 {#if isLoading}
   <div class="loading-overlay">
@@ -140,7 +176,6 @@
       class:lg:col-span-2={i >= 2}
       class:glowing={glowingToolName === tool.name}
     >
-      <!-- Content remains the same -->
       <div>
         <div class="flex justify-between items-center mb-6">
           <span
@@ -179,7 +214,7 @@
         {#if tool.approved}
           <button
             on:click={() => incrementLikes(tool)}
-            disabled={likeCount >= MAX_LIKES || glowingToolName}
+            disabled={sessionLikeCount >= MAX_LIKES_PER_SESSION || glowingToolName}
             class="text-sm font-black text-white/40 hover:text-white transition-all flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
           >
             LIKE <span class="text-2xl group-hover:animate-shake group-disabled:animate-none">👍️</span>
@@ -210,84 +245,25 @@
   <p class="text-sm tracking-widest uppercase mb-4">
     &copy; 2026 AI Interface Alliance. Driven by Design & Logic.
   </p>
-  <p class="text-xs">You have {MAX_LIKES - likeCount} likes remaining in this session.</p>
+  <p class="text-xs">You have {MAX_LIKES_PER_SESSION - sessionLikeCount} likes remaining in this session.</p>
 </footer>
 
 <style>
-  /* Styles remain the same, but add loading style */
   .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(5, 5, 5, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    color: white;
-    font-size: 1.5rem;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(5, 5, 5, 0.8);
+    display: flex; justify-content: center; align-items: center; z-index: 9999;
+    color: white; font-size: 1.5rem;
   }
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-
-  :global(body) {
-    font-family: 'Inter', sans-serif;
-    background-color: #050505;
-    color: #e5e5e5;
-    transition: background-color 0.5s ease;
-  }
-
-  .bento-card {
-    background: rgba(20, 20, 20, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s, background 0.3s;
-  }
-
-  .bento-card:hover {
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.7);
-    background: rgba(30, 30, 30, 0.7);
-  }
-
-  .rank-badge {
-    background: linear-gradient(135deg, #6366f1, #a855f7);
-  }
-
-  .gradient-text {
-    background: linear-gradient(to right, #fff, #94a3b8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: background-image 1s ease;
-  }
-
-  .icon-container {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    margin-bottom: 1.5rem;
-  }
-
-  @keyframes shake {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-15deg); }
-    75% { transform: rotate(15deg); }
-  }
-
-  .animate-shake {
-    animation: shake 0.5s ease-in-out;
-  }
-
-  .glowing {
-    animation: rainbow-glow 1s ease-in-out 3;
-  }
-
+  :global(body) { font-family: 'Inter', sans-serif; background-color: #050505; color: #e5e5e5; }
+  .bento-card { background: rgba(20, 20, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all 0.3s; }
+  .bento-card:hover { border-color: rgba(255, 255, 255, 0.4); transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.7); background: rgba(30, 30, 30, 0.7); }
+  .rank-badge { background: linear-gradient(135deg, #6366f1, #a855f7); }
+  .gradient-text { background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: background-image 1s ease; }
+  .icon-container { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(255, 255, 255, 0.05); margin-bottom: 1.5rem; }
+  @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-15deg); } 75% { transform: rotate(15deg); } }
+  .animate-shake { animation: shake 0.5s ease-in-out; }
+  .glowing { animation: rainbow-glow 1s ease-in-out 3; }
   @keyframes rainbow-glow {
     0%, 100% { box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.7); }
     15% { box-shadow: 0 0 20px 5px rgba(255, 165, 0, 0.7); }
@@ -297,15 +273,7 @@
     75% { box-shadow: 0 0 20px 5px rgba(75, 0, 130, 0.7); }
     90% { box-shadow: 0 0 20px 5px rgba(238, 130, 238, 0.7); }
   }
-
-  :global(::-webkit-scrollbar) {
-    width: 8px;
-  }
-  :global(::-webkit-scrollbar-track) {
-    background: #050505;
-  }
-  :global(::-webkit-scrollbar-thumb) {
-    background: #333;
-    border-radius: 4px;
-  }
+  :global(::-webkit-scrollbar) { width: 8px; }
+  :global(::-webkit-scrollbar-track) { background: #050505; }
+  :global(::-webkit-scrollbar-thumb) { background: #333; border-radius: 4px; }
 </style>
