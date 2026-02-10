@@ -10,6 +10,8 @@
   const MAX_LIKES_PER_SESSION = 10;
   let glowingToolName = null;
   let isLoading = true;
+  let submitMessage = "";
+  let submitStatus = ""; // 'success' or 'error'
 
   // APIのベースURL（デプロイ後に実際のURLに置き換えてください）
   const apiUrl = 'https://us-central1-best-10-ide-22445562-d228a.cloudfunctions.net/api'; 
@@ -33,6 +35,43 @@
     } finally {
       isLoading = false;
     }
+
+    // Implement batch sending for likes
+    function sendLikeBatch() {
+        if (isSendingBatch || Object.keys(pendingLikes).length === 0) return;
+        
+        isSendingBatch = true;
+        const batchToSend = { ...pendingLikes };
+        pendingLikes = {}; // Reset pending likes
+
+        fetch(`${apiUrl}/batch`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ likes: batchToSend })
+        })
+        .then(res => {
+            if (!res.ok) {
+                // If failed, merge back to pendingLikes
+                console.error("Batch update failed");
+                pendingLikes = { ...batchToSend, ...pendingLikes };
+            }
+        })
+        .catch(err => {
+            console.error("Batch update error", err);
+            pendingLikes = { ...batchToSend, ...pendingLikes };
+        })
+        .finally(() => {
+            isSendingBatch = false;
+        });
+    }
+
+    // Start batch interval
+    likeBatchInterval = setInterval(sendLikeBatch, 5000); // Send every 5 seconds
+
+    return () => {
+        clearInterval(likeBatchInterval);
+        sendLikeBatch(); // Send remaining likes on unmount
+    };
   });
 
   function handleLike(tool) {
@@ -48,21 +87,48 @@
         sessionLikeCount++;
     }
     
+    // Add to pending likes
+    pendingLikes[tool.name] = (pendingLikes[tool.name] || 0) + 1;
+
     // Flash effect
     glowingToolName = tool.name;
     setTimeout(() => glowingToolName = null, 500);
-
-    // TODO: Implement actual API call to save likes
   }
 
   async function handleSubmit() {
     if (!newUrl) return;
     submitted = true;
-    setTimeout(() => {
-        newUrl = "";
+    submitMessage = "";
+    submitStatus = "";
+    
+    try {
+        const res = await fetch(`${apiUrl}/url`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: newUrl })
+        });
+        
+        if (res.ok) {
+            submitMessage = "ありがとうございます！審査後に掲載されます。";
+            submitStatus = "success";
+            setTimeout(() => {
+                newUrl = "";
+                submitted = false;
+                submitMessage = "";
+                submitStatus = "";
+            }, 3000);
+        } else {
+            throw new Error('Submission failed');
+        }
+    } catch (e) {
+        submitMessage = "送信に失敗しました。後でもう一度お試しください。";
+        submitStatus = "error";
         submitted = false;
-        alert("ありがとうございます！審査後に掲載されます。");
-    }, 1500);
+        setTimeout(() => {
+            submitMessage = "";
+            submitStatus = "";
+        }, 3000);
+    }
   }
 </script>
 
@@ -167,6 +233,11 @@
                     {submitted ? '送信完了' : '推薦する'}
                 </button>
             </div>
+            {#if submitMessage}
+                <div class="mt-4 p-4 rounded-xl {submitStatus === 'success' ? 'bg-green-500/20 text-green-200 border border-green-500/30' : 'bg-red-500/20 text-red-200 border border-red-500/30'}">
+                    {submitMessage}
+                </div>
+            {/if}
         </section>
         
         <footer class="text-center text-gray-600 text-sm py-12 border-t border-white/5 mt-12">

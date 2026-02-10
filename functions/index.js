@@ -6,7 +6,7 @@ const path = require("path");
 admin.initializeApp();
 
 // Define paths to data files
-const dataDir = path.resolve(__dirname, "..", "data");
+const dataDir = path.resolve(__dirname, "data");
 const toolsPath = path.join(dataDir, "tools.json");
 const likesPath = path.join(dataDir, "likes.json");
 const urlsPath = path.join(dataDir, "urls.json");
