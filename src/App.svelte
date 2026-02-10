@@ -49,35 +49,16 @@
 </header>
 
 <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
-  <div class="bento-card rounded-[2rem] p-8 lg:col-span-6">
-    <h2 class="text-2xl font-bold mb-4">Add a new tool</h2>
-    <div class="flex gap-4">
-      <input
-        type="text"
-        bind:value={newUrl}
-        placeholder="Enter tool URL"
-        class="flex-grow bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      />
-      <button
-        on:click={addTool}
-        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-      >
-        Add Tool
-      </button>
-    </div>
-  </div>
-
   {#each sortedTools as tool, i (tool.name)}
     <div
       animate:flip={{duration: 300}}
-      class="bento-card rounded-[2rem] p-8 flex flex-col justify-between transition-all duration-300 {tool.approved
+      class="bento-card rounded-[2rem] p-8 flex flex-col justify-between transition-all duration-300 md:col-span-1 {tool.approved
         ? ''
         : 'opacity-50 grayscale'} {i === sortedTools.length - 1 && i !== 0
         ? 'grayscale'
         : ''}"
       class:lg:col-span-3={i < 2}
       class:lg:col-span-2={i >= 2}
-      class:md:col-span-1
     >
       <div>
         <div class="flex justify-between items-center mb-6">
@@ -132,6 +113,23 @@
       </div>
     </div>
   {/each}
+  <div class="bento-card rounded-[2rem] p-8 lg:col-span-6">
+    <h2 class="text-2xl font-bold mb-4">Add a new tool</h2>
+    <div class="flex gap-4">
+      <input
+        type="text"
+        bind:value={newUrl}
+        placeholder="Enter tool URL"
+        class="flex-grow bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+      <button
+        on:click={addTool}
+        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+      >
+        Add Tool
+      </button>
+    </div>
+  </div>
 </main>
 
 <footer class="max-w-7xl mx-auto mt-24 text-center text-gray-600 pb-16">
