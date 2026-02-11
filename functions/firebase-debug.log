@@ -1,0 +1,819 @@
+[debug] [2026-02-11T02:48:42.157Z] ----------------------------------------------------------------------
+[debug] [2026-02-11T02:48:42.160Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /home/user/best-10-ide/functions/node_modules/.bin/firebase deploy --only functions
+[debug] [2026-02-11T02:48:42.160Z] CLI Version:   11.30.0
+[debug] [2026-02-11T02:48:42.160Z] Platform:      linux
+[debug] [2026-02-11T02:48:42.161Z] Node Version:  v20.19.1
+[debug] [2026-02-11T02:48:42.161Z] Time:          Wed Feb 11 2026 02:48:42 GMT+0000 (Coordinated Universal Time)
+[debug] [2026-02-11T02:48:42.161Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-02-11T02:48:42.235Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-11T02:48:42.235Z] > authorizing via signed-in user (onsen.bonsai@gmail.com)
+[debug] [2026-02-11T02:48:42.235Z] [iam] checking project best-10-ide-22445562-d228a for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2026-02-11T02:48:42.237Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions [none]
+[debug] [2026-02-11T02:48:42.238Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:48:42.238Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-02-11T02:48:43.056Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions 200
+[debug] [2026-02-11T02:48:43.057Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-02-11T02:48:43.058Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2026-02-11T02:48:43.058Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-02-11T02:48:44.048Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2026-02-11T02:48:44.049Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'best-10-ide-22445562-d228a'...
+[info] 
+[info] i  deploying functions 
+[debug] [2026-02-11T02:48:44.063Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a [none]
+[debug] [2026-02-11T02:48:44.346Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a 200
+[debug] [2026-02-11T02:48:44.346Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a {"projectId":"best-10-ide-22445562-d228a","projectNumber":"453601648043","displayName":"Firebase app","name":"projects/best-10-ide-22445562-d228a","resources":{"hostingSite":"best-10-ide-22445562-d228a"},"state":"ACTIVE","etag":"1_af34aee2-9c7a-4057-9adb-04ebc06b091f"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2026-02-11T02:48:44.350Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com [none]
+[debug] [2026-02-11T02:48:44.350Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:48:44.351Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com [none]
+[debug] [2026-02-11T02:48:44.352Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:48:44.354Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com [none]
+[debug] [2026-02-11T02:48:44.354Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:48:44.357Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com [none]
+[debug] [2026-02-11T02:48:44.358Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:48:45.366Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com 200
+[debug] [2026-02-11T02:48:45.366Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2026-02-11T02:48:45.389Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com 200
+[debug] [2026-02-11T02:48:45.390Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2026-02-11T02:48:45.410Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com 200
+[debug] [2026-02-11T02:48:45.411Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2026-02-11T02:48:45.432Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com 200
+[debug] [2026-02-11T02:48:45.432Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2026-02-11T02:48:45.433Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/adminSdkConfig [none]
+[debug] [2026-02-11T02:48:45.684Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/adminSdkConfig 200
+[debug] [2026-02-11T02:48:45.684Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/adminSdkConfig {"projectId":"best-10-ide-22445562-d228a","storageBucket":"best-10-ide-22445562-d228a.firebasestorage.app"}
+[debug] [2026-02-11T02:48:45.685Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/configs [none]
+[debug] [2026-02-11T02:48:45.895Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/configs 200
+[debug] [2026-02-11T02:48:45.895Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/configs {}
+[debug] [2026-02-11T02:48:45.898Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-02-11T02:48:46.452Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "./node_modules/.bin/firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.11.1",
+    "firebase-functions": "^3.24.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "firebase-tools": "^11.30.0"
+  },
+  "private": true
+}
+[debug] [2026-02-11T02:48:46.452Z] Building nodejs source
+[debug] [2026-02-11T02:48:46.453Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-02-11T02:48:46.458Z] Found firebase-functions binary at '/home/user/best-10-ide/functions/node_modules/.bin/firebase-functions'
+[debug] [2026-02-11T02:48:46.724Z] Serving at port 8495
+
+[debug] [2026-02-11T02:48:46.814Z] Got response from /__/functions.yaml {"endpoints":{"api":{"platform":"gcfv2","cpu":1,"region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"api"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2026-02-11T02:48:46.846Z] shutdown requested via /__/quitquitquit
+
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged /home/user/best-10-ide/functions (153.01 KB) for uploading 
+[debug] [2026-02-11T02:48:46.988Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/best-10-ide-22445562-d228a/locations/-/functions [none]
+[debug] [2026-02-11T02:48:47.735Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/best-10-ide-22445562-d228a/locations/-/functions 200
+[debug] [2026-02-11T02:48:47.735Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/best-10-ide-22445562-d228a/locations/-/functions {}
+[debug] [2026-02-11T02:48:47.737Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2026-02-11T02:48:48.994Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/-/functions 200
+[debug] [2026-02-11T02:48:48.994Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/-/functions {"functions":[{"name":"projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api","buildConfig":{"build":"projects/453601648043/locations/us-central1/builds/7d6dddf1-b71b-4ec5-9c60-3fa9c42ee912","runtime":"nodejs20","entryPoint":"api","source":{"storageSource":{"bucket":"gcf-v2-sources-453601648043-us-central1","object":"api/function-source.zip","generation":"1770737723174097"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRepository":"projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts","sourceProvenance":{"resolvedStorageSource":{"bucket":"gcf-v2-sources-453601648043-us-central1","object":"api/function-source.zip","generation":"1770737723174097"}},"dockerRegistry":"ARTIFACT_REGISTRY","serviceAccount":"projects/best-10-ide-22445562-d228a/serviceAccounts/453601648043-compute@developer.gserviceaccount.com","automaticUpdatePolicy":{}},"serviceConfig":{"service":"projects/best-10-ide-22445562-d228a/locations/us-central1/services/api","timeoutSeconds":60,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}","GCLOUD_PROJECT":"best-10-ide-22445562-d228a","EVENTARC_CLOUD_EVENT_SOURCE":"projects/best-10-ide-22445562-d228a/locations/us-central1/services/api","FUNCTION_TARGET":"api","LOG_EXECUTION_ID":"true"},"ingressSettings":"ALLOW_ALL","uri":"https://api-lgjuedfyra-uc.a.run.app","serviceAccountEmail":"453601648043-compute@developer.gserviceaccount.com","availableMemory":"256Mi","allTrafficOnLatestRevision":true,"revision":"api-00001-map","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"state":"ACTIVE","updateTime":"2026-02-10T15:36:36.924730339Z","labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"8a502ba39c69f55cc0fc2f52c834b1e717111162"},"environment":"GEN_2","url":"https://us-central1-best-10-ide-22445562-d228a.cloudfunctions.net/api","createTime":"2026-02-10T15:35:24.484782784Z","satisfiesPzi":true}]}
+[debug] [2026-02-11T02:48:48.995Z] GCFv2 function has a deprecated runtime: {
+  "name": "projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api",
+  "buildConfig": {
+    "build": "projects/453601648043/locations/us-central1/builds/7d6dddf1-b71b-4ec5-9c60-3fa9c42ee912",
+    "runtime": "nodejs20",
+    "entryPoint": "api",
+    "source": {
+      "storageSource": {
+        "bucket": "gcf-v2-sources-453601648043-us-central1",
+        "object": "api/function-source.zip",
+        "generation": "1770737723174097"
+      }
+    },
+    "environmentVariables": {
+      "GOOGLE_NODE_RUN_SCRIPTS": ""
+    },
+    "dockerRepository": "projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts",
+    "sourceProvenance": {
+      "resolvedStorageSource": {
+        "bucket": "gcf-v2-sources-453601648043-us-central1",
+        "object": "api/function-source.zip",
+        "generation": "1770737723174097"
+      }
+    },
+    "dockerRegistry": "ARTIFACT_REGISTRY",
+    "serviceAccount": "projects/best-10-ide-22445562-d228a/serviceAccounts/453601648043-compute@developer.gserviceaccount.com",
+    "automaticUpdatePolicy": {}
+  },
+  "serviceConfig": {
+    "service": "projects/best-10-ide-22445562-d228a/locations/us-central1/services/api",
+    "timeoutSeconds": 60,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "best-10-ide-22445562-d228a",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/best-10-ide-22445562-d228a/locations/us-central1/services/api",
+      "FUNCTION_TARGET": "api",
+      "LOG_EXECUTION_ID": "true"
+    },
+    "ingressSettings": "ALLOW_ALL",
+    "uri": "https://api-lgjuedfyra-uc.a.run.app",
+    "serviceAccountEmail": "453601648043-compute@developer.gserviceaccount.com",
+    "availableMemory": "256Mi",
+    "allTrafficOnLatestRevision": true,
+    "revision": "api-00001-map",
+    "maxInstanceRequestConcurrency": 80,
+    "availableCpu": "1"
+  },
+  "state": "ACTIVE",
+  "updateTime": "2026-02-10T15:36:36.924730339Z",
+  "labels": {
+    "deployment-tool": "cli-firebase",
+    "firebase-functions-hash": "8a502ba39c69f55cc0fc2f52c834b1e717111162"
+  },
+  "environment": "GEN_2",
+  "url": "https://us-central1-best-10-ide-22445562-d228a.cloudfunctions.net/api",
+  "createTime": "2026-02-10T15:35:24.484782784Z",
+  "satisfiesPzi": true
+}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[debug] [2026-02-11T02:48:49.001Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com [none]
+[debug] [2026-02-11T02:48:49.001Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:48:49.001Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com [none]
+[debug] [2026-02-11T02:48:49.002Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:48:49.002Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com [none]
+[debug] [2026-02-11T02:48:49.002Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:48:49.002Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com [none]
+[debug] [2026-02-11T02:48:49.003Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:48:49.267Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com 200
+[debug] [2026-02-11T02:48:49.267Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com [omitted]
+[info] ✔  functions: required API run.googleapis.com is enabled 
+[debug] [2026-02-11T02:48:50.009Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com 200
+[debug] [2026-02-11T02:48:50.009Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com [omitted]
+[info] ✔  functions: required API pubsub.googleapis.com is enabled 
+[debug] [2026-02-11T02:48:50.024Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com 200
+[debug] [2026-02-11T02:48:50.024Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com [omitted]
+[info] ✔  functions: required API eventarc.googleapis.com is enabled 
+[debug] [2026-02-11T02:48:50.067Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com 200
+[debug] [2026-02-11T02:48:50.067Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com [omitted]
+[info] ✔  functions: required API storage.googleapis.com is enabled 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2026-02-11T02:48:50.069Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2026-02-11T02:48:50.070Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2026-02-11T02:48:50.364Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2026-02-11T02:48:50.364Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-453601648043@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"110538148489637742259"}}
+[debug] [2026-02-11T02:48:50.401Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2026-02-11T02:48:50.401Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-453601648043@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"107044513728749154982"}}
+[debug] [2026-02-11T02:48:50.407Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a [none]
+[debug] [2026-02-11T02:48:50.648Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a 200
+[debug] [2026-02-11T02:48:50.648Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a {"projectId":"best-10-ide-22445562-d228a","projectNumber":"453601648043","displayName":"Firebase app","name":"projects/best-10-ide-22445562-d228a","resources":{"hostingSite":"best-10-ide-22445562-d228a"},"state":"ACTIVE","etag":"1_af34aee2-9c7a-4057-9adb-04ebc06b091f"}
+[debug] [2026-02-11T02:48:50.652Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2026-02-11T02:48:51.643Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2026-02-11T02:48:51.644Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/4af2352f-adfe-461a-b3b0-22299c776fa7.zip?GoogleAccessId=service-453601648043@gcf-admin-robot.iam.gserviceaccount.com&Expires=1770779931&Signature=X72%2B57ZDQ1JdM%2BRSQcjM9MeywEGQQ09OdtCo9TBvrFKcynLOZcAFDb16Pl6CIcWjteOpVUzGPBJcfLn7r0TdrwcMn3pXgfXRyBKVaqQwZ3ZOYgs6smaDqcfs7MXp18XQ0TlrzhafV4ie08RIntD8cJ%2FdPmsC3hRMFSdxzU2cXmJ4hxu7g05jaji4osxv7sKaXdiEKbs%2BFXBKvQCXlBuP%2BKh31WL8DErSmcXT8frF9MPaAugaU5Mx97Y6FDOi1GW3ClEyU6BhrvRcQmgMjfuQwJUw%2BCzT%2BwLvlmtp7Phn3216ZK8X94aeoj0qZ3hG6zNbABm3WRAkm59M%2F2rqvE8G8g%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com","object":"4af2352f-adfe-461a-b3b0-22299c776fa7.zip"}}
+[debug] [2026-02-11T02:48:51.646Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/4af2352f-adfe-461a-b3b0-22299c776fa7.zip GoogleAccessId=service-453601648043%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1770779931&Signature=X72%2B57ZDQ1JdM%2BRSQcjM9MeywEGQQ09OdtCo9TBvrFKcynLOZcAFDb16Pl6CIcWjteOpVUzGPBJcfLn7r0TdrwcMn3pXgfXRyBKVaqQwZ3ZOYgs6smaDqcfs7MXp18XQ0TlrzhafV4ie08RIntD8cJ%2FdPmsC3hRMFSdxzU2cXmJ4hxu7g05jaji4osxv7sKaXdiEKbs%2BFXBKvQCXlBuP%2BKh31WL8DErSmcXT8frF9MPaAugaU5Mx97Y6FDOi1GW3ClEyU6BhrvRcQmgMjfuQwJUw%2BCzT%2BwLvlmtp7Phn3216ZK8X94aeoj0qZ3hG6zNbABm3WRAkm59M%2F2rqvE8G8g%3D%3D
+[debug] [2026-02-11T02:48:51.646Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/4af2352f-adfe-461a-b3b0-22299c776fa7.zip [stream]
+[debug] [2026-02-11T02:48:52.267Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/4af2352f-adfe-461a-b3b0-22299c776fa7.zip 200
+[debug] [2026-02-11T02:48:52.267Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/4af2352f-adfe-461a-b3b0-22299c776fa7.zip [omitted]
+[info] ✔  functions: functions folder uploaded successfully 
+[info] i  functions: updating Node.js 18 function api(us-central1)... 
+[debug] [2026-02-11T02:48:52.275Z] >>> [apiv2][query] PATCH https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api updateMask=name%2CbuildConfig.runtime%2CbuildConfig.entryPoint%2CbuildConfig.source.storageSource.bucket%2CbuildConfig.source.storageSource.object%2CbuildConfig.environmentVariables%2CserviceConfig.environmentVariables%2CserviceConfig.availableMemory%2CserviceConfig.maxInstanceRequestConcurrency%2CserviceConfig.availableCpu%2Clabels%2CbuildConfig.buildEnvironmentVariables
+[debug] [2026-02-11T02:48:52.275Z] >>> [apiv2][body] PATCH https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api {"name":"projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api","buildConfig":{"runtime":"nodejs18","entryPoint":"api","source":{"storageSource":{"bucket":"gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com","object":"4af2352f-adfe-461a-b3b0-22299c776fa7.zip"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}","GCLOUD_PROJECT":"best-10-ide-22445562-d228a","EVENTARC_CLOUD_EVENT_SOURCE":"projects/best-10-ide-22445562-d228a/locations/us-central1/services/api","FUNCTION_TARGET":"api","LOG_EXECUTION_ID":"true"},"availableMemory":"256Mi","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"labels":{"deployment-tool":"cli-firebase--project-idx","firebase-functions-hash":"9c3a0c48f4b7c4328fcf6b88498151a728dc3e6e"}}
+[debug] [2026-02-11T02:48:53.628Z] <<< [apiv2][status] PATCH https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api 400
+[debug] [2026-02-11T02:48:53.629Z] <<< [apiv2][body] PATCH https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api {"error":{"code":400,"message":"Runtime 'nodejs18' is not supported. New deployment of nodejs18 is not allowed. Please update the function to a supported runtime and try deploying again.","status":"INVALID_ARGUMENT"}}
+[warn] ⚠  functions: HTTP Error: 400, Runtime 'nodejs18' is not supported. New deployment of nodejs18 is not allowed. Please update the function to a supported runtime and try deploying again. 
+[warn] ⚠  functions: failed to update function projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api 
+[error] Failed to update function projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api
+[debug] [2026-02-11T02:48:53.634Z] Total Function Deployment time: 1360
+[debug] [2026-02-11T02:48:53.634Z] 1 Functions Deployed
+[debug] [2026-02-11T02:48:53.634Z] 1 Functions Errored
+[debug] [2026-02-11T02:48:53.634Z] 0 Function Deployments Aborted
+[debug] [2026-02-11T02:48:53.634Z] Average Function Deployment time: 1359
+[info] 
+[info] Functions deploy had errors with the following functions:
+	api(us-central1)
+[debug] [2026-02-11T02:48:53.658Z] Not printing URL for HTTPS function. Typically this means it didn't match a filter or we failed deployment
+[info] i  functions: cleaning up build files... 
+[debug] [2026-02-11T02:48:53.662Z] >>> [apiv2][query] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts/packages/api [none]
+[debug] [2026-02-11T02:48:53.664Z] >>> [apiv2][query] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list [none]
+[debug] [2026-02-11T02:48:54.623Z] <<< [apiv2][status] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts/packages/api 404
+[debug] [2026-02-11T02:48:54.623Z] <<< [apiv2][body] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts/packages/api {"error":{"code":404,"message":"Package \"projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts/packages/api\" was not found.","status":"NOT_FOUND"}}
+[debug] [2026-02-11T02:48:55.420Z] <<< [apiv2][status] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list 404
+[debug] [2026-02-11T02:48:55.420Z] <<< [apiv2][body] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2026-02-11T02:48:55.420Z] Failed docker command with error HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Not Found","status":404}
+[debug] [2026-02-11T02:48:55.423Z] >>> [apiv2][query] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list [none]
+[debug] [2026-02-11T02:48:55.685Z] <<< [apiv2][status] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list 404
+[debug] [2026-02-11T02:48:55.685Z] <<< [apiv2][body] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2026-02-11T02:48:55.686Z] Failed docker command with error HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Not Found","status":404}
+[debug] [2026-02-11T02:48:55.786Z] >>> [apiv2][query] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list [none]
+[debug] [2026-02-11T02:48:56.032Z] <<< [apiv2][status] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list 404
+[debug] [2026-02-11T02:48:56.032Z] <<< [apiv2][body] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2026-02-11T02:48:56.033Z] Failed docker command with error HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Not Found","status":404}
+[warn] ⚠  functions: Unhandled error cleaning up build images. This could result in a small monthly bill if not corrected. You can attempt to delete these images by redeploying or you can delete them manually at https://console.cloud.google.com/gcr/images/best-10-ide-22445562-d228a/us/gcf 
+[debug] [2026-02-11T02:48:56.035Z] Functions deploy failed.
+[debug] [2026-02-11T02:48:56.035Z] {
+  "endpoint": {
+    "id": "api",
+    "project": "best-10-ide-22445562-d228a",
+    "region": "us-central1",
+    "entryPoint": "api",
+    "platform": "gcfv2",
+    "runtime": "nodejs18",
+    "httpsTrigger": {},
+    "labels": {
+      "deployment-tool": "cli-firebase--project-idx"
+    },
+    "cpu": 1,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "best-10-ide-22445562-d228a",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/best-10-ide-22445562-d228a/locations/us-central1/services/api",
+      "FUNCTION_TARGET": "api",
+      "LOG_EXECUTION_ID": "true"
+    },
+    "codebase": "default",
+    "availableMemoryMb": 256,
+    "securityLevel": "SECURE_ALWAYS",
+    "concurrency": 80,
+    "targetedByOnly": false,
+    "hash": "9c3a0c48f4b7c4328fcf6b88498151a728dc3e6e"
+  },
+  "op": "update",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "context": {
+      "function": "projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api"
+    },
+    "exit": 1,
+    "message": "Failed to update function projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api",
+    "original": {
+      "name": "FirebaseError",
+      "children": [],
+      "context": {
+        "body": {
+          "error": {
+            "code": 400,
+            "message": "Runtime 'nodejs18' is not supported. New deployment of nodejs18 is not allowed. Please update the function to a supported runtime and try deploying again.",
+            "status": "INVALID_ARGUMENT"
+          }
+        },
+        "response": {
+          "statusCode": 400
+        }
+      },
+      "exit": 1,
+      "message": "HTTP Error: 400, Runtime 'nodejs18' is not supported. New deployment of nodejs18 is not allowed. Please update the function to a supported runtime and try deploying again.",
+      "status": 400
+    },
+    "status": 400
+  }
+}
+[debug] [2026-02-11T02:48:56.046Z] Error: Failed to update function api in region us-central1
+    at /home/user/best-10-ide/functions/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:48:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Fabricator.updateV2Function (/home/user/best-10-ide/functions/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:365:32)
+    at async Fabricator.updateEndpoint (/home/user/best-10-ide/functions/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:150:13)
+    at async handle (/home/user/best-10-ide/functions/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:85:17)
+[error] 
+[error] Error: There was an error deploying functions
+[debug] [2026-02-11T02:50:08.948Z] ----------------------------------------------------------------------
+[debug] [2026-02-11T02:50:08.950Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /home/user/best-10-ide/functions/node_modules/.bin/firebase deploy --only functions
+[debug] [2026-02-11T02:50:08.951Z] CLI Version:   11.30.0
+[debug] [2026-02-11T02:50:08.951Z] Platform:      linux
+[debug] [2026-02-11T02:50:08.951Z] Node Version:  v20.19.1
+[debug] [2026-02-11T02:50:08.951Z] Time:          Wed Feb 11 2026 02:50:08 GMT+0000 (Coordinated Universal Time)
+[debug] [2026-02-11T02:50:08.951Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-02-11T02:50:09.026Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-11T02:50:09.027Z] > authorizing via signed-in user (onsen.bonsai@gmail.com)
+[debug] [2026-02-11T02:50:09.027Z] [iam] checking project best-10-ide-22445562-d228a for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2026-02-11T02:50:09.029Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions [none]
+[debug] [2026-02-11T02:50:09.029Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:50:09.030Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-02-11T02:50:09.841Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions 200
+[debug] [2026-02-11T02:50:09.841Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-02-11T02:50:09.842Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2026-02-11T02:50:09.842Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-02-11T02:50:10.883Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2026-02-11T02:50:10.883Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'best-10-ide-22445562-d228a'...
+[info] 
+[info] i  deploying functions 
+[debug] [2026-02-11T02:50:10.888Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a [none]
+[debug] [2026-02-11T02:50:11.140Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a 200
+[debug] [2026-02-11T02:50:11.140Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a {"projectId":"best-10-ide-22445562-d228a","projectNumber":"453601648043","displayName":"Firebase app","name":"projects/best-10-ide-22445562-d228a","resources":{"hostingSite":"best-10-ide-22445562-d228a"},"state":"ACTIVE","etag":"1_af34aee2-9c7a-4057-9adb-04ebc06b091f"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2026-02-11T02:50:11.144Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com [none]
+[debug] [2026-02-11T02:50:11.144Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:50:11.146Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com [none]
+[debug] [2026-02-11T02:50:11.146Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:50:11.149Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com [none]
+[debug] [2026-02-11T02:50:11.149Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:50:11.151Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com [none]
+[debug] [2026-02-11T02:50:11.151Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:50:12.176Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com 200
+[debug] [2026-02-11T02:50:12.177Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2026-02-11T02:50:12.188Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com 200
+[debug] [2026-02-11T02:50:12.188Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2026-02-11T02:50:12.205Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com 200
+[debug] [2026-02-11T02:50:12.205Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2026-02-11T02:50:12.222Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com 200
+[debug] [2026-02-11T02:50:12.222Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2026-02-11T02:50:12.223Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/adminSdkConfig [none]
+[debug] [2026-02-11T02:50:12.431Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/adminSdkConfig 200
+[debug] [2026-02-11T02:50:12.431Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/adminSdkConfig {"projectId":"best-10-ide-22445562-d228a","storageBucket":"best-10-ide-22445562-d228a.firebasestorage.app"}
+[debug] [2026-02-11T02:50:12.432Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/configs [none]
+[debug] [2026-02-11T02:50:12.682Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/configs 200
+[debug] [2026-02-11T02:50:12.682Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/configs {}
+[debug] [2026-02-11T02:50:12.684Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-02-11T02:50:13.217Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "./node_modules/.bin/firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.11.1",
+    "firebase-functions": "^4.9.0",
+    "@google-cloud/storage": "^7.11.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "firebase-tools": "^11.30.0"
+  },
+  "private": true
+}
+[debug] [2026-02-11T02:50:13.217Z] Building nodejs source
+[debug] [2026-02-11T02:50:13.219Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-02-11T02:50:13.223Z] Found firebase-functions binary at '/home/user/best-10-ide/functions/node_modules/.bin/firebase-functions'
+[debug] [2026-02-11T02:50:13.468Z] Serving at port 8092
+
+[debug] [2026-02-11T02:50:13.649Z] Got response from /__/functions.yaml {"endpoints":{"api":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","cpu":1,"region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"api"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged /home/user/best-10-ide/functions (156.43 KB) for uploading 
+[debug] [2026-02-11T02:50:13.812Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/best-10-ide-22445562-d228a/locations/-/functions [none]
+[debug] [2026-02-11T02:50:14.564Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/best-10-ide-22445562-d228a/locations/-/functions 200
+[debug] [2026-02-11T02:50:14.565Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/best-10-ide-22445562-d228a/locations/-/functions {}
+[debug] [2026-02-11T02:50:14.566Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2026-02-11T02:50:15.836Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/-/functions 200
+[debug] [2026-02-11T02:50:15.836Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/-/functions {"functions":[{"name":"projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api","buildConfig":{"build":"projects/453601648043/locations/us-central1/builds/7d6dddf1-b71b-4ec5-9c60-3fa9c42ee912","runtime":"nodejs20","entryPoint":"api","source":{"storageSource":{"bucket":"gcf-v2-sources-453601648043-us-central1","object":"api/function-source.zip","generation":"1770737723174097"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRepository":"projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts","sourceProvenance":{"resolvedStorageSource":{"bucket":"gcf-v2-sources-453601648043-us-central1","object":"api/function-source.zip","generation":"1770737723174097"}},"dockerRegistry":"ARTIFACT_REGISTRY","serviceAccount":"projects/best-10-ide-22445562-d228a/serviceAccounts/453601648043-compute@developer.gserviceaccount.com","automaticUpdatePolicy":{}},"serviceConfig":{"service":"projects/best-10-ide-22445562-d228a/locations/us-central1/services/api","timeoutSeconds":60,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}","GCLOUD_PROJECT":"best-10-ide-22445562-d228a","EVENTARC_CLOUD_EVENT_SOURCE":"projects/best-10-ide-22445562-d228a/locations/us-central1/services/api","FUNCTION_TARGET":"api","LOG_EXECUTION_ID":"true"},"ingressSettings":"ALLOW_ALL","uri":"https://api-lgjuedfyra-uc.a.run.app","serviceAccountEmail":"453601648043-compute@developer.gserviceaccount.com","availableMemory":"256Mi","allTrafficOnLatestRevision":true,"revision":"api-00001-map","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"state":"ACTIVE","updateTime":"2026-02-10T15:36:36.924730339Z","labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"8a502ba39c69f55cc0fc2f52c834b1e717111162"},"environment":"GEN_2","url":"https://us-central1-best-10-ide-22445562-d228a.cloudfunctions.net/api","createTime":"2026-02-10T15:35:24.484782784Z","satisfiesPzi":true}]}
+[debug] [2026-02-11T02:50:15.837Z] GCFv2 function has a deprecated runtime: {
+  "name": "projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api",
+  "buildConfig": {
+    "build": "projects/453601648043/locations/us-central1/builds/7d6dddf1-b71b-4ec5-9c60-3fa9c42ee912",
+    "runtime": "nodejs20",
+    "entryPoint": "api",
+    "source": {
+      "storageSource": {
+        "bucket": "gcf-v2-sources-453601648043-us-central1",
+        "object": "api/function-source.zip",
+        "generation": "1770737723174097"
+      }
+    },
+    "environmentVariables": {
+      "GOOGLE_NODE_RUN_SCRIPTS": ""
+    },
+    "dockerRepository": "projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts",
+    "sourceProvenance": {
+      "resolvedStorageSource": {
+        "bucket": "gcf-v2-sources-453601648043-us-central1",
+        "object": "api/function-source.zip",
+        "generation": "1770737723174097"
+      }
+    },
+    "dockerRegistry": "ARTIFACT_REGISTRY",
+    "serviceAccount": "projects/best-10-ide-22445562-d228a/serviceAccounts/453601648043-compute@developer.gserviceaccount.com",
+    "automaticUpdatePolicy": {}
+  },
+  "serviceConfig": {
+    "service": "projects/best-10-ide-22445562-d228a/locations/us-central1/services/api",
+    "timeoutSeconds": 60,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "best-10-ide-22445562-d228a",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/best-10-ide-22445562-d228a/locations/us-central1/services/api",
+      "FUNCTION_TARGET": "api",
+      "LOG_EXECUTION_ID": "true"
+    },
+    "ingressSettings": "ALLOW_ALL",
+    "uri": "https://api-lgjuedfyra-uc.a.run.app",
+    "serviceAccountEmail": "453601648043-compute@developer.gserviceaccount.com",
+    "availableMemory": "256Mi",
+    "allTrafficOnLatestRevision": true,
+    "revision": "api-00001-map",
+    "maxInstanceRequestConcurrency": 80,
+    "availableCpu": "1"
+  },
+  "state": "ACTIVE",
+  "updateTime": "2026-02-10T15:36:36.924730339Z",
+  "labels": {
+    "deployment-tool": "cli-firebase",
+    "firebase-functions-hash": "8a502ba39c69f55cc0fc2f52c834b1e717111162"
+  },
+  "environment": "GEN_2",
+  "url": "https://us-central1-best-10-ide-22445562-d228a.cloudfunctions.net/api",
+  "createTime": "2026-02-10T15:35:24.484782784Z",
+  "satisfiesPzi": true
+}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[debug] [2026-02-11T02:50:15.844Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com [none]
+[debug] [2026-02-11T02:50:15.844Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:50:15.845Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com [none]
+[debug] [2026-02-11T02:50:15.845Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:50:15.845Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com [none]
+[debug] [2026-02-11T02:50:15.845Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:50:15.846Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com [none]
+[debug] [2026-02-11T02:50:15.846Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:50:16.105Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com 200
+[debug] [2026-02-11T02:50:16.105Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com [omitted]
+[info] ✔  functions: required API storage.googleapis.com is enabled 
+[debug] [2026-02-11T02:50:16.111Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com 200
+[debug] [2026-02-11T02:50:16.112Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com [omitted]
+[info] ✔  functions: required API pubsub.googleapis.com is enabled 
+[debug] [2026-02-11T02:50:16.831Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com 200
+[debug] [2026-02-11T02:50:16.831Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com [omitted]
+[info] ✔  functions: required API run.googleapis.com is enabled 
+[debug] [2026-02-11T02:50:16.860Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com 200
+[debug] [2026-02-11T02:50:16.861Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com [omitted]
+[info] ✔  functions: required API eventarc.googleapis.com is enabled 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2026-02-11T02:50:16.864Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2026-02-11T02:50:16.865Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2026-02-11T02:50:17.162Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2026-02-11T02:50:17.163Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-453601648043@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"110538148489637742259"}}
+[debug] [2026-02-11T02:50:17.996Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2026-02-11T02:50:17.996Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-453601648043@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"107044513728749154982"}}
+[debug] [2026-02-11T02:50:17.999Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a [none]
+[debug] [2026-02-11T02:50:18.273Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a 200
+[debug] [2026-02-11T02:50:18.273Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a {"projectId":"best-10-ide-22445562-d228a","projectNumber":"453601648043","displayName":"Firebase app","name":"projects/best-10-ide-22445562-d228a","resources":{"hostingSite":"best-10-ide-22445562-d228a"},"state":"ACTIVE","etag":"1_af34aee2-9c7a-4057-9adb-04ebc06b091f"}
+[debug] [2026-02-11T02:50:18.277Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2026-02-11T02:50:19.276Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2026-02-11T02:50:19.277Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/3e7d82d6-e7b6-4f10-8593-95ed0fcd6798.zip?GoogleAccessId=service-453601648043@gcf-admin-robot.iam.gserviceaccount.com&Expires=1770780019&Signature=jBWjJnxUAxqEkgTLIJjejNharyxkVaDXn6ABV4f3SCKbnHNuSURugCq%2By2z9SBIWYpGbiO75qHSC9UtmYsQToYhoyNldS0h4vZ4%2FarDUcd4RJin4RVjOFW2OEDeZhtAL491J2Y%2FE78WB3nyVjxXE%2FzagEjOWTFRyWAvRfrUiF1Au9%2FENe%2F3wHoIdNL6aj8XlSkj3Ve2gpt2Gz8MOASjxbWzVc%2B3cMazAku0lYVNpjRlvvjIdk%2BznOs3RnKNO1yeeyqwOnFytfmuffO0%2FQGL17%2BeMYvSVvedPz6fiOfEvJAlxs73iz4ArXQN1s%2Bwt1PVWrBypPy9cUT4GP7PEihtzWA%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com","object":"3e7d82d6-e7b6-4f10-8593-95ed0fcd6798.zip"}}
+[debug] [2026-02-11T02:50:19.280Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/3e7d82d6-e7b6-4f10-8593-95ed0fcd6798.zip GoogleAccessId=service-453601648043%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1770780019&Signature=jBWjJnxUAxqEkgTLIJjejNharyxkVaDXn6ABV4f3SCKbnHNuSURugCq%2By2z9SBIWYpGbiO75qHSC9UtmYsQToYhoyNldS0h4vZ4%2FarDUcd4RJin4RVjOFW2OEDeZhtAL491J2Y%2FE78WB3nyVjxXE%2FzagEjOWTFRyWAvRfrUiF1Au9%2FENe%2F3wHoIdNL6aj8XlSkj3Ve2gpt2Gz8MOASjxbWzVc%2B3cMazAku0lYVNpjRlvvjIdk%2BznOs3RnKNO1yeeyqwOnFytfmuffO0%2FQGL17%2BeMYvSVvedPz6fiOfEvJAlxs73iz4ArXQN1s%2Bwt1PVWrBypPy9cUT4GP7PEihtzWA%3D%3D
+[debug] [2026-02-11T02:50:19.281Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/3e7d82d6-e7b6-4f10-8593-95ed0fcd6798.zip [stream]
+[debug] [2026-02-11T02:50:20.010Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/3e7d82d6-e7b6-4f10-8593-95ed0fcd6798.zip 200
+[debug] [2026-02-11T02:50:20.010Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/3e7d82d6-e7b6-4f10-8593-95ed0fcd6798.zip [omitted]
+[info] ✔  functions: functions folder uploaded successfully 
+[info] i  functions: updating Node.js 18 function api(us-central1)... 
+[debug] [2026-02-11T02:50:20.019Z] >>> [apiv2][query] PATCH https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api updateMask=name%2CbuildConfig.runtime%2CbuildConfig.entryPoint%2CbuildConfig.source.storageSource.bucket%2CbuildConfig.source.storageSource.object%2CbuildConfig.environmentVariables%2CserviceConfig.environmentVariables%2CserviceConfig.ingressSettings%2CserviceConfig.timeoutSeconds%2CserviceConfig.serviceAccountEmail%2CserviceConfig.availableMemory%2CserviceConfig.minInstanceCount%2CserviceConfig.maxInstanceCount%2CserviceConfig.maxInstanceRequestConcurrency%2CserviceConfig.availableCpu%2CserviceConfig.vpcConnector%2CserviceConfig.vpcConnectorEgressSettings%2Clabels%2CbuildConfig.buildEnvironmentVariables
+[debug] [2026-02-11T02:50:20.019Z] >>> [apiv2][body] PATCH https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api {"name":"projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api","buildConfig":{"runtime":"nodejs18","entryPoint":"api","source":{"storageSource":{"bucket":"gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com","object":"3e7d82d6-e7b6-4f10-8593-95ed0fcd6798.zip"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}","GCLOUD_PROJECT":"best-10-ide-22445562-d228a","EVENTARC_CLOUD_EVENT_SOURCE":"projects/best-10-ide-22445562-d228a/locations/us-central1/services/api","FUNCTION_TARGET":"api","LOG_EXECUTION_ID":"true"},"ingressSettings":null,"timeoutSeconds":null,"serviceAccountEmail":null,"availableMemory":"256Mi","minInstanceCount":null,"maxInstanceCount":null,"maxInstanceRequestConcurrency":80,"availableCpu":"1","vpcConnector":null,"vpcConnectorEgressSettings":null},"labels":{"deployment-tool":"cli-firebase--project-idx","firebase-functions-hash":"ea28d9afdeed005068c7c90bbcb4e4a8b131661f"}}
+[debug] [2026-02-11T02:50:21.428Z] <<< [apiv2][status] PATCH https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api 400
+[debug] [2026-02-11T02:50:21.428Z] <<< [apiv2][body] PATCH https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api {"error":{"code":400,"message":"Runtime 'nodejs18' is not supported. New deployment of nodejs18 is not allowed. Please update the function to a supported runtime and try deploying again.","status":"INVALID_ARGUMENT"}}
+[warn] ⚠  functions: HTTP Error: 400, Runtime 'nodejs18' is not supported. New deployment of nodejs18 is not allowed. Please update the function to a supported runtime and try deploying again. 
+[warn] ⚠  functions: failed to update function projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api 
+[error] Failed to update function projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api
+[debug] [2026-02-11T02:50:21.434Z] Total Function Deployment time: 1415
+[debug] [2026-02-11T02:50:21.434Z] 1 Functions Deployed
+[debug] [2026-02-11T02:50:21.434Z] 1 Functions Errored
+[debug] [2026-02-11T02:50:21.434Z] 0 Function Deployments Aborted
+[debug] [2026-02-11T02:50:21.434Z] Average Function Deployment time: 1414
+[info] 
+[info] Functions deploy had errors with the following functions:
+	api(us-central1)
+[debug] [2026-02-11T02:50:21.458Z] Not printing URL for HTTPS function. Typically this means it didn't match a filter or we failed deployment
+[info] i  functions: cleaning up build files... 
+[debug] [2026-02-11T02:50:21.460Z] >>> [apiv2][query] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts/packages/api [none]
+[debug] [2026-02-11T02:50:21.461Z] >>> [apiv2][query] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list [none]
+[debug] [2026-02-11T02:50:21.765Z] <<< [apiv2][status] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list 404
+[debug] [2026-02-11T02:50:21.765Z] <<< [apiv2][body] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2026-02-11T02:50:21.765Z] Failed docker command with error HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Not Found","status":404}
+[debug] [2026-02-11T02:50:21.768Z] >>> [apiv2][query] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list [none]
+[debug] [2026-02-11T02:50:22.013Z] <<< [apiv2][status] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list 404
+[debug] [2026-02-11T02:50:22.013Z] <<< [apiv2][body] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2026-02-11T02:50:22.013Z] Failed docker command with error HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Not Found","status":404}
+[debug] [2026-02-11T02:50:22.115Z] >>> [apiv2][query] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list [none]
+[debug] [2026-02-11T02:50:22.357Z] <<< [apiv2][status] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list 404
+[debug] [2026-02-11T02:50:22.357Z] <<< [apiv2][body] GET https://us.gcr.io/v2/best-10-ide-22445562-d228a/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2026-02-11T02:50:22.357Z] Failed docker command with error HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Not Found","status":404}
+[debug] [2026-02-11T02:50:22.443Z] <<< [apiv2][status] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts/packages/api 404
+[debug] [2026-02-11T02:50:22.443Z] <<< [apiv2][body] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts/packages/api {"error":{"code":404,"message":"Package \"projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts/packages/api\" was not found.","status":"NOT_FOUND"}}
+[warn] ⚠  functions: Unhandled error cleaning up build images. This could result in a small monthly bill if not corrected. You can attempt to delete these images by redeploying or you can delete them manually at https://console.cloud.google.com/gcr/images/best-10-ide-22445562-d228a/us/gcf 
+[debug] [2026-02-11T02:50:22.444Z] Functions deploy failed.
+[debug] [2026-02-11T02:50:22.444Z] {
+  "endpoint": {
+    "id": "api",
+    "project": "best-10-ide-22445562-d228a",
+    "region": "us-central1",
+    "entryPoint": "api",
+    "platform": "gcfv2",
+    "runtime": "nodejs18",
+    "httpsTrigger": {},
+    "labels": {
+      "deployment-tool": "cli-firebase--project-idx"
+    },
+    "serviceAccount": null,
+    "ingressSettings": null,
+    "availableMemoryMb": null,
+    "timeoutSeconds": null,
+    "maxInstances": null,
+    "minInstances": null,
+    "concurrency": 80,
+    "cpu": 1,
+    "vpc": null,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "best-10-ide-22445562-d228a",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/best-10-ide-22445562-d228a/locations/us-central1/services/api",
+      "FUNCTION_TARGET": "api",
+      "LOG_EXECUTION_ID": "true"
+    },
+    "codebase": "default",
+    "securityLevel": "SECURE_ALWAYS",
+    "targetedByOnly": false,
+    "hash": "ea28d9afdeed005068c7c90bbcb4e4a8b131661f"
+  },
+  "op": "update",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "context": {
+      "function": "projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api"
+    },
+    "exit": 1,
+    "message": "Failed to update function projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api",
+    "original": {
+      "name": "FirebaseError",
+      "children": [],
+      "context": {
+        "body": {
+          "error": {
+            "code": 400,
+            "message": "Runtime 'nodejs18' is not supported. New deployment of nodejs18 is not allowed. Please update the function to a supported runtime and try deploying again.",
+            "status": "INVALID_ARGUMENT"
+          }
+        },
+        "response": {
+          "statusCode": 400
+        }
+      },
+      "exit": 1,
+      "message": "HTTP Error: 400, Runtime 'nodejs18' is not supported. New deployment of nodejs18 is not allowed. Please update the function to a supported runtime and try deploying again.",
+      "status": 400
+    },
+    "status": 400
+  }
+}
+[debug] [2026-02-11T02:50:22.451Z] Error: Failed to update function api in region us-central1
+    at /home/user/best-10-ide/functions/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:48:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Fabricator.updateV2Function (/home/user/best-10-ide/functions/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:365:32)
+    at async Fabricator.updateEndpoint (/home/user/best-10-ide/functions/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:150:13)
+    at async handle (/home/user/best-10-ide/functions/node_modules/firebase-tools/lib/deploy/functions/release/fabricator.js:85:17)
+[error] 
+[error] Error: There was an error deploying functions
+[debug] [2026-02-11T02:51:33.953Z] ----------------------------------------------------------------------
+[debug] [2026-02-11T02:51:33.956Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /home/user/best-10-ide/functions/node_modules/.bin/firebase deploy --only functions
+[debug] [2026-02-11T02:51:33.956Z] CLI Version:   11.30.0
+[debug] [2026-02-11T02:51:33.956Z] Platform:      linux
+[debug] [2026-02-11T02:51:33.956Z] Node Version:  v20.19.1
+[debug] [2026-02-11T02:51:33.956Z] Time:          Wed Feb 11 2026 02:51:33 GMT+0000 (Coordinated Universal Time)
+[debug] [2026-02-11T02:51:33.957Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-02-11T02:51:34.045Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-11T02:51:34.046Z] > authorizing via signed-in user (onsen.bonsai@gmail.com)
+[debug] [2026-02-11T02:51:34.046Z] [iam] checking project best-10-ide-22445562-d228a for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2026-02-11T02:51:34.048Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions [none]
+[debug] [2026-02-11T02:51:34.048Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:34.048Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-02-11T02:51:34.861Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions 200
+[debug] [2026-02-11T02:51:34.861Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-02-11T02:51:34.862Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2026-02-11T02:51:34.862Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-02-11T02:51:35.873Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2026-02-11T02:51:35.873Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/best-10-ide-22445562-d228a/serviceAccounts/best-10-ide-22445562-d228a@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'best-10-ide-22445562-d228a'...
+[info] 
+[info] i  deploying functions 
+[debug] [2026-02-11T02:51:35.878Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a [none]
+[debug] [2026-02-11T02:51:36.141Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a 200
+[debug] [2026-02-11T02:51:36.141Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a {"projectId":"best-10-ide-22445562-d228a","projectNumber":"453601648043","displayName":"Firebase app","name":"projects/best-10-ide-22445562-d228a","resources":{"hostingSite":"best-10-ide-22445562-d228a"},"state":"ACTIVE","etag":"1_af34aee2-9c7a-4057-9adb-04ebc06b091f"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2026-02-11T02:51:36.144Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com [none]
+[debug] [2026-02-11T02:51:36.145Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:36.146Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com [none]
+[debug] [2026-02-11T02:51:36.146Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:36.148Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com [none]
+[debug] [2026-02-11T02:51:36.148Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:36.149Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com [none]
+[debug] [2026-02-11T02:51:36.150Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:37.197Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com 200
+[debug] [2026-02-11T02:51:37.198Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2026-02-11T02:51:37.206Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com 200
+[debug] [2026-02-11T02:51:37.206Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2026-02-11T02:51:37.214Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com 200
+[debug] [2026-02-11T02:51:37.215Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2026-02-11T02:51:37.301Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com 200
+[debug] [2026-02-11T02:51:37.301Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2026-02-11T02:51:37.309Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/adminSdkConfig [none]
+[debug] [2026-02-11T02:51:37.541Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/adminSdkConfig 200
+[debug] [2026-02-11T02:51:37.542Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/adminSdkConfig {"projectId":"best-10-ide-22445562-d228a","storageBucket":"best-10-ide-22445562-d228a.firebasestorage.app"}
+[debug] [2026-02-11T02:51:37.543Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/configs [none]
+[debug] [2026-02-11T02:51:37.912Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/configs 200
+[debug] [2026-02-11T02:51:37.912Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a/configs {}
+[debug] [2026-02-11T02:51:37.915Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-02-11T02:51:38.505Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "./node_modules/.bin/firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.11.1",
+    "firebase-functions": "^4.9.0",
+    "@google-cloud/storage": "^7.11.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "firebase-tools": "^11.30.0"
+  },
+  "private": true
+}
+[debug] [2026-02-11T02:51:38.505Z] Building nodejs source
+[debug] [2026-02-11T02:51:38.507Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-02-11T02:51:38.512Z] Found firebase-functions binary at '/home/user/best-10-ide/functions/node_modules/.bin/firebase-functions'
+[debug] [2026-02-11T02:51:38.763Z] Serving at port 8423
+
+[debug] [2026-02-11T02:51:38.937Z] Got response from /__/functions.yaml {"endpoints":{"api_v2":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","cpu":1,"region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"api_v2"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged /home/user/best-10-ide/functions (156.46 KB) for uploading 
+[debug] [2026-02-11T02:51:39.109Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/best-10-ide-22445562-d228a/locations/-/functions [none]
+[debug] [2026-02-11T02:51:39.831Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/best-10-ide-22445562-d228a/locations/-/functions 200
+[debug] [2026-02-11T02:51:39.832Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/best-10-ide-22445562-d228a/locations/-/functions {}
+[debug] [2026-02-11T02:51:39.835Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2026-02-11T02:51:41.054Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/-/functions 200
+[debug] [2026-02-11T02:51:41.054Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/-/functions {"functions":[{"name":"projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api","buildConfig":{"build":"projects/453601648043/locations/us-central1/builds/7d6dddf1-b71b-4ec5-9c60-3fa9c42ee912","runtime":"nodejs20","entryPoint":"api","source":{"storageSource":{"bucket":"gcf-v2-sources-453601648043-us-central1","object":"api/function-source.zip","generation":"1770737723174097"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"dockerRepository":"projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts","sourceProvenance":{"resolvedStorageSource":{"bucket":"gcf-v2-sources-453601648043-us-central1","object":"api/function-source.zip","generation":"1770737723174097"}},"dockerRegistry":"ARTIFACT_REGISTRY","serviceAccount":"projects/best-10-ide-22445562-d228a/serviceAccounts/453601648043-compute@developer.gserviceaccount.com","automaticUpdatePolicy":{}},"serviceConfig":{"service":"projects/best-10-ide-22445562-d228a/locations/us-central1/services/api","timeoutSeconds":60,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}","GCLOUD_PROJECT":"best-10-ide-22445562-d228a","EVENTARC_CLOUD_EVENT_SOURCE":"projects/best-10-ide-22445562-d228a/locations/us-central1/services/api","FUNCTION_TARGET":"api","LOG_EXECUTION_ID":"true"},"ingressSettings":"ALLOW_ALL","uri":"https://api-lgjuedfyra-uc.a.run.app","serviceAccountEmail":"453601648043-compute@developer.gserviceaccount.com","availableMemory":"256Mi","allTrafficOnLatestRevision":true,"revision":"api-00001-map","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"state":"ACTIVE","updateTime":"2026-02-10T15:36:36.924730339Z","labels":{"firebase-functions-hash":"8a502ba39c69f55cc0fc2f52c834b1e717111162","deployment-tool":"cli-firebase"},"environment":"GEN_2","url":"https://us-central1-best-10-ide-22445562-d228a.cloudfunctions.net/api","createTime":"2026-02-10T15:35:24.484782784Z","satisfiesPzi":true}]}
+[debug] [2026-02-11T02:51:41.055Z] GCFv2 function has a deprecated runtime: {
+  "name": "projects/best-10-ide-22445562-d228a/locations/us-central1/functions/api",
+  "buildConfig": {
+    "build": "projects/453601648043/locations/us-central1/builds/7d6dddf1-b71b-4ec5-9c60-3fa9c42ee912",
+    "runtime": "nodejs20",
+    "entryPoint": "api",
+    "source": {
+      "storageSource": {
+        "bucket": "gcf-v2-sources-453601648043-us-central1",
+        "object": "api/function-source.zip",
+        "generation": "1770737723174097"
+      }
+    },
+    "environmentVariables": {
+      "GOOGLE_NODE_RUN_SCRIPTS": ""
+    },
+    "dockerRepository": "projects/best-10-ide-22445562-d228a/locations/us-central1/repositories/gcf-artifacts",
+    "sourceProvenance": {
+      "resolvedStorageSource": {
+        "bucket": "gcf-v2-sources-453601648043-us-central1",
+        "object": "api/function-source.zip",
+        "generation": "1770737723174097"
+      }
+    },
+    "dockerRegistry": "ARTIFACT_REGISTRY",
+    "serviceAccount": "projects/best-10-ide-22445562-d228a/serviceAccounts/453601648043-compute@developer.gserviceaccount.com",
+    "automaticUpdatePolicy": {}
+  },
+  "serviceConfig": {
+    "service": "projects/best-10-ide-22445562-d228a/locations/us-central1/services/api",
+    "timeoutSeconds": 60,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"best-10-ide-22445562-d228a\",\"storageBucket\":\"best-10-ide-22445562-d228a.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "best-10-ide-22445562-d228a",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/best-10-ide-22445562-d228a/locations/us-central1/services/api",
+      "FUNCTION_TARGET": "api",
+      "LOG_EXECUTION_ID": "true"
+    },
+    "ingressSettings": "ALLOW_ALL",
+    "uri": "https://api-lgjuedfyra-uc.a.run.app",
+    "serviceAccountEmail": "453601648043-compute@developer.gserviceaccount.com",
+    "availableMemory": "256Mi",
+    "allTrafficOnLatestRevision": true,
+    "revision": "api-00001-map",
+    "maxInstanceRequestConcurrency": 80,
+    "availableCpu": "1"
+  },
+  "state": "ACTIVE",
+  "updateTime": "2026-02-10T15:36:36.924730339Z",
+  "labels": {
+    "firebase-functions-hash": "8a502ba39c69f55cc0fc2f52c834b1e717111162",
+    "deployment-tool": "cli-firebase"
+  },
+  "environment": "GEN_2",
+  "url": "https://us-central1-best-10-ide-22445562-d228a.cloudfunctions.net/api",
+  "createTime": "2026-02-10T15:35:24.484782784Z",
+  "satisfiesPzi": true
+}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[debug] [2026-02-11T02:51:41.063Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com [none]
+[debug] [2026-02-11T02:51:41.063Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:41.064Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com [none]
+[debug] [2026-02-11T02:51:41.064Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:41.065Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com [none]
+[debug] [2026-02-11T02:51:41.065Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:41.065Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com [none]
+[debug] [2026-02-11T02:51:41.066Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:41.317Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com 200
+[debug] [2026-02-11T02:51:41.317Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/pubsub.googleapis.com [omitted]
+[info] ✔  functions: required API pubsub.googleapis.com is enabled 
+[debug] [2026-02-11T02:51:41.458Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com 200
+[debug] [2026-02-11T02:51:41.458Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/eventarc.googleapis.com [omitted]
+[info] ✔  functions: required API eventarc.googleapis.com is enabled 
+[debug] [2026-02-11T02:51:42.094Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com 200
+[debug] [2026-02-11T02:51:42.095Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/run.googleapis.com [omitted]
+[info] ✔  functions: required API run.googleapis.com is enabled 
+[debug] [2026-02-11T02:51:42.098Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com 200
+[debug] [2026-02-11T02:51:42.099Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/best-10-ide-22445562-d228a/services/storage.googleapis.com [omitted]
+[info] ✔  functions: required API storage.googleapis.com is enabled 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2026-02-11T02:51:42.099Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2026-02-11T02:51:42.103Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2026-02-11T02:51:43.178Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2026-02-11T02:51:43.179Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-453601648043@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"110538148489637742259"}}
+[debug] [2026-02-11T02:51:43.244Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2026-02-11T02:51:43.244Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/453601648043/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-453601648043@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"107044513728749154982"}}
+[debug] [2026-02-11T02:51:43.249Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a [none]
+[debug] [2026-02-11T02:51:43.528Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a 200
+[debug] [2026-02-11T02:51:43.528Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/best-10-ide-22445562-d228a {"projectId":"best-10-ide-22445562-d228a","projectNumber":"453601648043","displayName":"Firebase app","name":"projects/best-10-ide-22445562-d228a","resources":{"hostingSite":"best-10-ide-22445562-d228a"},"state":"ACTIVE","etag":"1_af34aee2-9c7a-4057-9adb-04ebc06b091f"}
+[debug] [2026-02-11T02:51:43.530Z] [functions] found 1 new HTTP functions, testing setIamPolicy permission...
+[debug] [2026-02-11T02:51:43.530Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions [none]
+[debug] [2026-02-11T02:51:43.530Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions x-goog-quota-user=projects/best-10-ide-22445562-d228a
+[debug] [2026-02-11T02:51:43.530Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2026-02-11T02:51:44.281Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions 200
+[debug] [2026-02-11T02:51:44.282Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/best-10-ide-22445562-d228a:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2026-02-11T02:51:44.282Z] [functions] found setIamPolicy permission, proceeding with deploy
+[debug] [2026-02-11T02:51:44.283Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2026-02-11T02:51:45.283Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2026-02-11T02:51:45.283Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/best-10-ide-22445562-d228a/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/bda6186b-1aec-4c88-93ba-15a62ca54ce0.zip?GoogleAccessId=service-453601648043@gcf-admin-robot.iam.gserviceaccount.com&Expires=1770780105&Signature=rkWsSHdR6hPoZAaWQ7ws%2Bg%2B%2FXhi4cGs%2ByLDmWFwwS3K7xN%2B5YOTKRzFLfmzfQzHQxJrr5sc8wKjVuBAnVzHXD1Z5oP1pcS2eJ5gVvsGxPQ9mVXUhfx%2BxW6YitIp8wag7kgPEy7cwenCMQjAF7ZYwNJ1%2FjCPwnM8mS1HOFnVuuwvHerS01Oy4XBT%2Ft1gs8KEzcOiSdu1aHXZRJ75ercnl%2BySLOlBSABJCFxnvpHT87U3%2FUilUJcp9KNHSa%2FK9vwwBoeN8r4cRU25Pg%2FxbxlCGbRE4X748EJ%2FYMuJAGp5Cyiq8%2BA%2FLDHgYPkXCXAw%2BjgGPkPNYBcxPmMNqJNO8zeqGcQ%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com","object":"bda6186b-1aec-4c88-93ba-15a62ca54ce0.zip"}}
+[debug] [2026-02-11T02:51:45.284Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/bda6186b-1aec-4c88-93ba-15a62ca54ce0.zip GoogleAccessId=service-453601648043%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1770780105&Signature=rkWsSHdR6hPoZAaWQ7ws%2Bg%2B%2FXhi4cGs%2ByLDmWFwwS3K7xN%2B5YOTKRzFLfmzfQzHQxJrr5sc8wKjVuBAnVzHXD1Z5oP1pcS2eJ5gVvsGxPQ9mVXUhfx%2BxW6YitIp8wag7kgPEy7cwenCMQjAF7ZYwNJ1%2FjCPwnM8mS1HOFnVuuwvHerS01Oy4XBT%2Ft1gs8KEzcOiSdu1aHXZRJ75ercnl%2BySLOlBSABJCFxnvpHT87U3%2FUilUJcp9KNHSa%2FK9vwwBoeN8r4cRU25Pg%2FxbxlCGbRE4X748EJ%2FYMuJAGp5Cyiq8%2BA%2FLDHgYPkXCXAw%2BjgGPkPNYBcxPmMNqJNO8zeqGcQ%3D%3D
+[debug] [2026-02-11T02:51:45.284Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/bda6186b-1aec-4c88-93ba-15a62ca54ce0.zip [stream]
+[debug] [2026-02-11T02:51:45.980Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/bda6186b-1aec-4c88-93ba-15a62ca54ce0.zip 200
+[debug] [2026-02-11T02:51:45.981Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-453601648043.us-central1.cloudfunctions.appspot.com/bda6186b-1aec-4c88-93ba-15a62ca54ce0.zip [omitted]
+[info] ✔  functions: functions folder uploaded successfully 
+[info] 
+The following functions are found in your project but do not exist in your local source code:
+	api(us-central1)
+
+If you are renaming a function or changing its region, it is recommended that you create the new function first before deleting the old one to prevent event loss. For more info, visit https://firebase.google.com/docs/functions/manage-functions#modify
+

@@ -1,8 +1,5 @@
+
 {
-  "functions": {
-    "source": "functions",
-    "runtime": "nodejs18"
-  },
   "hosting": {
     "public": "dist",
     "ignore": [
@@ -12,9 +9,13 @@
     ],
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/api_v2/**",
+        "function": "api_v2"
       }
     ]
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20"
   }
 }

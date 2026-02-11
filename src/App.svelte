@@ -11,7 +11,7 @@
   let submitMessage = "";
   let submitStatus = ""; // 'success' or 'error' or 'submitting'
 
-  const apiUrl = 'https://us-central1-best-10-ide-22445562-d228a.cloudfunctions.net/api'; 
+  const apiUrl = 'https://us-central1-best-10-ide-22445562-d228a.cloudfunctions.net/api_v2'; 
 
   let pendingLikes = {};
   let likeBatchInterval = null;
