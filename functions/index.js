@@ -2,7 +2,11 @@ const { onRequest } = require("firebase-functions/v2/https");
 const admin = require("firebase-admin");
 const logger = require("firebase-functions/logger");
 
-admin.initializeApp();
+// Initialize the Admin SDK only if it hasn't been initialized yet
+if (admin.apps.length === 0) {
+  admin.initializeApp();
+}
+
 const db = admin.firestore();
 
 // Rename the function to force a clean deployment
@@ -14,6 +18,8 @@ exports.api_v2 = onRequest(
   },
   async (req, res) => {
     try {
+      // The path will be in the format /<collectionName>/<docId>
+      // e.g., for a request to /api_v2/tools, req.path will be /tools
       const pathParts = req.path.split("/").filter(Boolean);
       const collectionName = pathParts[0];
       const docId = pathParts[1];
@@ -46,9 +52,12 @@ exports.api_v2 = onRequest(
           if (collectionName === 'bbs') {
               newItem.createdAt = admin.firestore.FieldValue.serverTimestamp();
           }
+          // If docId is provided, use it; otherwise, Firestore generates a new ID.
           const docRef = docId ? collection.doc(docId) : collection.doc();
           await docRef.set(newItem, { merge: true });
-          res.status(201).json({ id: docRef.id, ...newItem });
+          // Return the full new object including the generated ID
+          const createdDoc = await docRef.get();
+          res.status(201).json({ id: createdDoc.id, ...createdDoc.data() });
           break;
 
         case "PUT":
@@ -69,7 +78,7 @@ exports.api_v2 = onRequest(
           break;
       }
     } catch (error) {
-      logger.error("API Error:", error);
+      logger.error(`API Error in collection '${req.path}':`, error);
       res.status(500).send("Internal Server Error");
     }
   }
