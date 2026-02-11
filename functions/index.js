@@ -35,7 +35,7 @@ exports.api_v2 = onRequest(
           if (docId) {
             const doc = await collection.doc(docId).get();
             if (!doc.exists) return res.status(404).send("Not Found");
-            res.status(200).json({ id: doc.id, ...doc.data() });
+            res.status(200).json({ id: doc..id, ...doc.data() });
           } else {
             let query = collection;
             if (collectionName === 'bbs') {
