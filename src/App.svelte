@@ -226,13 +226,13 @@
             </div>
             
             <!-- BBS Card -->
-            <a href="/wiki.html" class="bento-card bbs-card">
+            <a href="/bbs.html" class="bento-card bbs-card">
                  <div class="space-y-4 z-10 flex-grow">
                     <h2 class="text-2xl font-bold text-white">Community Wiki</h2>
                     <p class="text-gray-400 text-sm">ツールについて語り、開発者と繋がろう。</p>
                  </div>
                  <div class="z-10 mt-auto flex items-center justify-end text-cyan-300 font-semibold">
-                    <span>Wikiへ</span>
+                    <span>BBSへ</span>
                     <svg class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                  </div>
             </a>

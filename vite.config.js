@@ -14,7 +14,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        wiki: resolve(__dirname, 'wiki.html') // Changed from bbs to wiki
+        bbs: resolve(__dirname, 'bbs.html')
       }
     }
   }

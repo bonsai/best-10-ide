@@ -1,19 +1,19 @@
 import './app.css';
 import App from './App.svelte';
-import Wiki from './Wiki.svelte';
+import BBS from './BBS.svelte';
 
 let app;
 
 const targetApp = document.getElementById('app');
-const targetWiki = document.getElementById('app-wiki');
+const targetBBS = document.getElementById('app-bbs');
 
 if (targetApp) {
     app = new App({
         target: targetApp,
     });
-} else if (targetWiki) {
-    app = new Wiki({
-        target: targetWiki,
+} else if (targetBBS) {
+    app = new BBS({
+        target: targetBBS,
     });
 }
 
