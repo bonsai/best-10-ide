@@ -10,6 +10,7 @@ const dataDir = path.resolve(__dirname, "..", "data");
 const toolsPath = path.join(dataDir, "tools.json");
 const likesPath = path.join(dataDir, "likes.json");
 const urlsPath = path.join(dataDir, "urls.json");
+const bbsPath = path.join(dataDir, "bbs.json"); // Added path for bbs data
 
 // Helper function to read JSON files
 const readJsonFile = async (filePath) => {
@@ -19,7 +20,8 @@ const readJsonFile = async (filePath) => {
   } catch (error) {
     if (error.code === 'ENOENT') {
       if (filePath.endsWith('likes.json')) return {};
-      if (filePath.endsWith('urls.json') || filePath.endsWith('tools.json')) return [];
+      // Added bbs.json to return an empty array if not found
+      if (filePath.endsWith('urls.json') || filePath.endsWith('tools.json') || filePath.endsWith('bbs.json')) return [];
     }
     throw error;
   }
@@ -31,17 +33,21 @@ const writeJsonFile = (filePath, data) => {
 };
 
 exports.api = functions.https.onRequest(async (req, res) => {
+  // Set CORS headers
   res.set("Access-Control-Allow-Origin", "*");
-  res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Added PUT, DELETE
   res.set("Access-Control-Allow-Headers", "Content-Type");
 
+  // Handle pre-flight OPTIONS requests
   if (req.method === "OPTIONS") {
     res.status(204).send("");
     return;
   }
 
   try {
-    const route = req.path.split('/').pop();
+    const pathParts = req.path.split('/').filter(Boolean); // e.g., ['api', 'bbs', 'post-123']
+    const route = pathParts[1];
+    const id = pathParts[2];
 
     switch (route) {
       case 'tools':
@@ -54,7 +60,7 @@ exports.api = functions.https.onRequest(async (req, res) => {
         res.status(200).json(mergedTools);
         break;
 
-      case 'batch': // Handles batch updates at /api/likes/batch
+      case 'batch':
         if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
         const { likes: batchLikes } = req.body;
         if (!batchLikes) return res.status(400).send("Bad Request: likes object is missing");
@@ -78,6 +84,44 @@ exports.api = functions.https.onRequest(async (req, res) => {
         urls.push({ url, submittedAt: new Date().toISOString() });
         await writeJsonFile(urlsPath, urls);
         res.status(200).send("URL submitted successfully");
+        break;
+
+      // New case for 'bbs' (Wiki)
+      case 'bbs':
+        let posts = await readJsonFile(bbsPath);
+
+        if (req.method === 'GET' && !id) {
+            res.status(200).json(posts);
+        } else if (req.method === 'POST' && !id) {
+            const newPost = req.body;
+            if (!newPost.id || !newPost.content) {
+                return res.status(400).send("Bad Request: Missing id or content");
+            }
+            posts.unshift(newPost);
+            await writeJsonFile(bbsPath, posts);
+            res.status(201).json(newPost);
+        } else if (req.method === 'PUT' && id) {
+            const { content } = req.body;
+            let updated = false;
+            posts = posts.map(p => {
+                if (p.id === id) {
+                    updated = true;
+                    return { ...p, content };
+                }
+                return p;
+            });
+            if (!updated) return res.status(404).send("Post not found");
+            await writeJsonFile(bbsPath, posts);
+            res.status(200).json(posts.find(p => p.id === id));
+        } else if (req.method === 'DELETE' && id) {
+            const initialLength = posts.length;
+            posts = posts.filter(p => p.id !== id);
+            if (posts.length === initialLength) return res.status(404).send("Post not found");
+            await writeJsonFile(bbsPath, posts);
+            res.status(204).send("");
+        } else {
+            res.status(405).send('Method Not Allowed');
+        }
         break;
 
       default:

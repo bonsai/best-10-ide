@@ -18,7 +18,7 @@
     "tags": ["Block GUI", "Smart CLI", "Collaborative"],
     "color": "from-cyan-400 to-blue-500",
     "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-cyan-400\"><path d=\"M12 2H2v10h10V2Z\"/><path d=\"M22 2h-10v10h10V2Z\"/><path d=\"M12 12H2v10h10V12Z\"/><path d=\"M22 12h-10v10h10V12Z\"/></svg>",
-    "url": "",
+    "url": "https://www.warp.dev/",
     "approved": true
   },
   {
@@ -29,7 +29,7 @@
     "tags": ["User-Centric", "Open Source", "Optimized"],
     "color": "from-green-400 to-emerald-600",
     "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-green-400\"><path d=\"M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z\"/><path d=\"M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z\"/><path d=\"M12 3v5\"/></svg>",
-    "url": "",
+    "url": "https://www.pearcoding.com/",
     "approved": true
   },
   {
@@ -51,7 +51,7 @@
     "tags": ["Pioneer", "High-Sync", "VS Code Engine"],
     "color": "from-indigo-400 to-purple-500",
     "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-indigo-400\"><path d=\"m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z\"/><path d=\"m13 13 6 6\"/></svg>",
-    "url": "",
+    "url": "https://cursor.sh/",
     "approved": true
   },
   {
@@ -62,7 +62,7 @@
     "tags": ["Standard", "Extensible"],
     "color": "from-sky-500 to-blue-700",
     "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-sky-500\"><path d=\"M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3Z\"/></svg>",
-    "url": "",
+    "url": "https://code.visualstudio.com/",
     "approved": true
   },
   {
@@ -84,7 +84,7 @@
     "tags": ["Performance", "Minimal"],
     "color": "from-gray-300 to-gray-500",
     "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-gray-300\"><path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"/></svg>",
-    "url": "",
+    "url": "https://zed.dev/",
     "approved": true
   },
   {

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "post-1",
+    "username": "SvelteFan",
+    "timestamp": "2026-07-10T14:48:00.000Z",
+    "content": "Does anyone have tips for optimizing the build process with the new Svelte 5 runes? My project is getting bigger."
+  },
+  {
+    "id": "post-2",
+    "username": "CursorPro",
+    "timestamp": "2026-07-10T18:22:00.000Z",
+    "content": "Just tried out the new AI features in Cursor, the Composer is a game changer! 🔥"
+  }
+]
